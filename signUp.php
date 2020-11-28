@@ -14,7 +14,7 @@
     	<label>Фамилия</label><br>
 		<input type="text" name="last_name" placeholder="Введите свою фамилию"><br>
 		<label>Логин</label><br>
-        <input type="text" name="login" placeholder="Введите свой логин"><br>
+        <input type="email" name="email" placeholder="Введите свой логин"><br>
         <label>Пароль</label><br>
         <input type="password" name="password" placeholder="Введите пароль"><br><br>
         <label>Подтверждение пароля</label><br>
@@ -26,6 +26,15 @@
         </select><br><br>
 
     	<button type="submit">Зарегистрироваться</button>
+
+        <?php
+            session_start();
+            if (isset($_SESSION['message'])) {
+                echo '<p> ' . $_SESSION['message'] . ' </p>';
+                unset($_SESSION['message']);
+            }
+            
+        ?>
 	</form>
 
 </body>

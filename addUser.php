@@ -4,13 +4,18 @@
 		
 	$first_name = $_POST['first_name'];
 	$last_name = $_POST['last_name'];
-	$login = $_POST['login'];
+	$email = $_POST['email'];
 	$password = $_POST['password'];
-	$password_confirm = $_POST['password_confirm'];
+	$password_confirm = $_POST['confirm_password'];
 	if($_POST['role'] == "admin") {
 		$id_role = 1;
 	} else {
 		$id_role = 2;
+	}
+
+	if(strlen($password) > 6){
+		$_SESSION['message'] = 'Password must be 8characters';
+		header('Location: signUp.php');
 	}
 
 	if($password === $password_confirm){
@@ -60,9 +65,8 @@
 			}
 		}		
 
-		mysqli_query($conn, "INSERT INTO `users` (`first_name`, `last_name`, `password`, `photo`, `role_id`) 
-		VALUES ('$first_name', '$last_name', '$password', '$target_file', '$id_role')"); 
-
+		mysqli_query($conn, "INSERT INTO `users` (`id`, `first_name`, `last_name`, `password`, `photo`, `role_id`, `email`) 
+		VALUES (NULL, '$first_name', '$last_name', '$password', NULL, '$id_role', '$email')"); 
 		mysqli_close($conn);
 		header('Location: login.php');
 	}else {
