@@ -20,6 +20,12 @@ session_start();
         <input type="password" name="password" placeholder="Введите пароль"><br>
         <button type="submit">Войти</button>
     </form>
-
+    <?php
+            if (isset($_SESSION['message'])) {
+                echo '<p> ' . $_SESSION['message'] . ' </p>';
+                unset($_SESSION['message']);
+            }
+            
+        ?>
 </body>
 </html>
