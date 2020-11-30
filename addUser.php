@@ -68,7 +68,7 @@
 		mysqli_query($conn, "INSERT INTO `users` (`id`, `first_name`, `last_name`, `password`, `photo`, `role_id`, `email`) 
 		VALUES (NULL, '$first_name', '$last_name', '$password', NULL, '$id_role', '$email')"); 
 		mysqli_close($conn);
-		header('Location: login.php');
+		header('Location: table.php');
 	}else {
         $_SESSION['message'] = 'Пароли не совпадают';
         header('Location: signUp.php');
