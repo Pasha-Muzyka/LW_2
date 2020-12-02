@@ -47,7 +47,7 @@ session_start();
                         </div>
                     </div>
                 <?php echo "<b> | </b>";
-                    echo '<a href="signUp.php" class="btn btn-link" tabindex="-1" role="button"><h1>Sign Up</h1></a>';
+                    echo '<a href="signUp.php" class="btn btn-link" role="button"><h1>Sign Up</h1></a>';
                 }
                 if(isset($_SESSION['message'])){
                     echo '<p><h1>' . $_SESSION['message'] . '</h1> </p>';
