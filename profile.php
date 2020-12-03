@@ -4,11 +4,13 @@ require_once 'connection.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $first_name = $_GET['first_name'];
-    $last_name = $_GET['last_name'];
-    $role_id = $_GET['role_id'];
-    if (isset($_GET['photo'])) {
-        $avatar = $_GET['photo'];
+    $user = mysqli_fetch_array( mysqli_query($conn,"SELECT * FROM `users` WHERE id='$id'",MYSQLI_ASSOC));
+    $id = $user['id'];
+    $first_name = $user['first_name'];
+    $last_name = $user['last_name'];
+    $role_id = $user['role_id'];
+    if (isset($user['photo'])) {
+        $avatar = $user['photo'];
     }
 } else {
     $id = $_SESSION['id'];
@@ -62,7 +64,7 @@ if (isset($_GET['id'])) {
                     <?php
                     if ((isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1) || (isset($_SESSION['id']) && $_SESSION['id'] == $id)) {
                         echo <<<html
-                                    <form action="updateinfo.php" method="post">
+                                    <form action="updateinfo.php?id=$id" method="post">
                                     <label>Имя</label><br>
                                     <input type="text" name="first_name" class="form-control" value="$first_name">
                                     <label>Фамилия</label><br>
@@ -87,8 +89,12 @@ if (isset($_GET['id'])) {
                                 }
                                 echo<<<html
                                     <button type="submit" class="btn btn-success mt-1" style="margin-left: 70px;"><h2>Обновить данные</h2></button>
-                                    <a href="deleteuser.php" class="btn btn-danger mt-1" role="button"><h2>Удалить профиль</h2></a>
+                                    <a href="deleteuser.php?id=$id"  class="btn btn-danger mt-1" role="button"><h2>Удалить профиль</h2></a>
                                 html;
+                                if(isset($_SESSION['editmessage'])){
+                                    echo '<p> ' . $_SESSION['editmessage'] . ' </p>';
+                                    unset($_SESSION['editmessage']);
+                                }
                     } else {
                         echo <<<html
                                 <form action="updateinfo.php" method="post">
